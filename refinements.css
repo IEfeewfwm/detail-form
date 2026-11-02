@@ -186,3 +186,21 @@ dialog .eyebrow{padding-right:50px}
  .project-credit{max-width:340px;text-align:left}
 }
 
+/* Font-independent, geometrically centered dialog controls. */
+button:is(.close,.viewer-close,.viewer-prev,.viewer-next){
+  display:flex;align-items:center;justify-content:center;padding:0;font-size:0;line-height:1;
+}
+button:is(.close,.viewer-close,.viewer-prev,.viewer-next)::before{
+  content:"";display:block;width:24px;height:24px;background:currentColor;
+  -webkit-mask:var(--control-icon) center/24px 24px no-repeat;
+  mask:var(--control-icon) center/24px 24px no-repeat;
+}
+button:is(.close,.viewer-close){
+  --control-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 6 12 12M18 6 6 18' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+button:is(.viewer-prev,.viewer-next){
+  --control-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 12H4m7-7-7 7 7 7' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+button.viewer-next::before{transform:rotate(180deg)}
+
+
