@@ -204,3 +204,57 @@ button:is(.viewer-prev,.viewer-next){
 button.viewer-next::before{transform:rotate(180deg)}
 
 
+
+/* iOS: only the modal content scrolls; controls stay in separate panels. */
+html.page-locked{overflow:hidden;scrollbar-gutter:auto;scroll-behavior:auto}
+html.page-locked body{position:fixed;top:var(--page-scroll-offset);left:0;right:0;width:100%;overflow:hidden}
+html.restoring-scroll{scroll-behavior:auto}
+#booking,#photo-viewer{
+ position:fixed;inset:auto;top:calc(var(--modal-vtop,0px) + var(--modal-vh,100dvh) / 2);left:50%;
+ transform:translate(-50%,-50%);margin:0;padding:0;width:min(550px,calc(100% - 24px));max-width:none;
+ height:min(740px,calc(var(--modal-vh,100dvh) - 32px));max-height:calc(var(--modal-vh,100dvh) - 32px);
+ overflow:hidden;border-radius:16px;
+}
+#booking[open],#photo-viewer[open]{display:flex;flex-direction:column}
+#booking .modal-top,#photo-viewer .viewer-top{
+ display:flex;align-items:center;justify-content:space-between;flex:0 0 auto;min-height:72px;
+ margin:0;padding:12px 24px;background:var(--bg);border-bottom:1px solid var(--line);gap:20px;
+}
+#booking .modal-top .eyebrow{padding:0}
+#booking .close{position:static;inset:auto;margin:0;flex-shrink:0}
+.modal-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scroll-behavior:auto;scroll-padding:24px;padding:8px 24px 24px}
+#booking h2{margin-top:20px}
+#booking .modal-intro{max-width:none}
+.modal-footer{flex:0 0 auto;padding:16px 24px max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
+.modal-footer .button{width:100%;min-height:50px}
+#booking .success{padding-bottom:12px}
+#photo-viewer{width:min(1240px,calc(100% - 24px));height:min(840px,calc(var(--modal-vh,100dvh) - 32px))}
+#photo-viewer .viewer-scroll{padding:16px 24px;display:grid;place-items:center;overflow:auto}
+#photo-viewer .viewer-image{width:100%;height:100%;min-height:0;max-height:100%;object-fit:contain}
+#photo-viewer .viewer-footer{flex:0 0 auto;padding:16px 24px max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
+#photo-viewer .viewer-bottom{margin:0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px}
+#photo-viewer #photo-caption{min-width:0;overflow-wrap:anywhere}
+#photo-viewer .viewer-note{margin-top:12px}
+.menu .menu-icon{display:flex;width:24px;height:24px;transform:none!important;align-items:center;justify-content:center}
+.menu-icon svg{display:block;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+.menu .menu-cross{display:none}
+.menu[aria-expanded=true] .menu-bars{display:none}
+.menu[aria-expanded=true] .menu-cross{display:block}
+.back-to-top{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:19;width:48px;height:48px;display:grid;place-items:center;padding:0;background:var(--paper);color:var(--black);border:1px solid #6b7477;border-radius:50%;box-shadow:0 3px 16px #0004}
+.back-to-top svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.back-to-top:hover{background:var(--accent)}
+html.page-locked .back-to-top{visibility:hidden}
+footer .footer-top>a:last-child{display:none}
+@media(max-width:650px){
+ #booking .modal-top,#photo-viewer .viewer-top{padding:10px 16px;min-height:64px}
+ .modal-scroll{padding:4px 20px 20px;scroll-padding:20px}
+ #booking h2{font-size:30px;margin-top:16px}
+ #booking .modal-intro{font-size:14px;margin-bottom:18px}
+ .modal-footer{padding:12px 20px max(12px,env(safe-area-inset-bottom))}
+ .modal-footer .button{padding:13px 18px;font-size:14px;min-height:48px}
+ #photo-viewer .viewer-scroll{padding:12px 16px}
+ #photo-viewer .viewer-footer{padding:12px 16px max(12px,env(safe-area-inset-bottom))}
+ #photo-viewer #photo-caption{font-size:14px}
+ #photo-viewer .viewer-note{font-size:11px;line-height:1.5}
+ .back-to-top{right:16px;bottom:max(16px,env(safe-area-inset-bottom))}
+}
